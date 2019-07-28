@@ -68,6 +68,7 @@
             font-weight: 500;
             color: #4b1650;
             line-height: 0.75rem;
+            cursor: pointer;
         }
         .swiper-slide:nth-child(1) .btn-download {
             bottom: 3.16rem;
@@ -161,12 +162,14 @@
             isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),
             isPhone = /(?:iPhone)/.test(ua) && !isTablet,
             isPad = /(?:iPad)/.test(ua),
+            isMac = /(?:Mac OS)/.test(ua),
             isPc = !isPhone && !isAndroid && !isSymbian && !isPad;
             return {
                 isTablet: isTablet,
                 isPhone: isPhone,
                 isAndroid : isAndroid,
-                isPc : isPc
+                isPc : isPc,
+                isMac: isMac
             };
         }();
 
@@ -185,11 +188,12 @@
         $('.btn-download').on('click', function() {
             var isAndroid = navigator.userAgent.toLowerCase().indexOf('android') !== -1;
             
-            if (isAndroid) {
-                window.open('https://huilezhuanapp.oss-cn-shanghai.aliyuncs.com/tangyueyoupin.apk');
+            if (os.isPhone || os.isMac || os.isPad) {
+                window.location.href = 'https://a.app.qq.com/o/simple.jsp?pkgname=com.alex.branddiscount';
+
             }
             else {
-                window.location.href = 'https://a.app.qq.com/o/simple.jsp?pkgname=com.alex.branddiscount';
+                window.open('https://huilezhuanapp.oss-cn-shanghai.aliyuncs.com/tangyueyoupin.apk');               
             }
         });  
         </script>
